@@ -26,11 +26,7 @@ public class Tournament implements CORE, Serializable
     {
        mPlayerName = pl;
        mTreasury = 1000;
-       //FileHandler fh = new FileHandler();
-       // Pull in Champions from stored file.
-       //mChampionsList = fh.setUpChampions();
-       // Pull in challenges from stored file.
-       //mChallengeList = fh.setUpChallenges();
+       
        mChampionsList = new ArrayList<>();
        mChallengeList = new ArrayList<>();
        
@@ -78,41 +74,41 @@ public class Tournament implements CORE, Serializable
     }
     
     private void setupChampions() {
-        Champion c1 = new Wizard("Ganfrank", 7, 400, true, SpellSpeciality.TRANSMUTATION);
-        mChampionsList.add(c1);
+        Champion ch1 = new Wizard("Ganfrank", 7, 400, true, SpellSpeciality.TRANSMUTATION);
+        mChampionsList.add(ch1);
 
-        Champion c2 = new Wizard("Rudolf", 6, 400, true, SpellSpeciality.INVISIBILITY);
-        mChampionsList.add(c2);
+        Champion ch2 = new Wizard("Rudolf", 6, 400, true, SpellSpeciality.INVISIBILITY);
+        mChampionsList.add(ch2);
 
-        Champion c3 = new Wizard("Neon", 2, 300, false, SpellSpeciality.TRANSLOCATION);
-        mChampionsList.add(c3);
+        Champion ch3 = new Wizard("Neon", 2, 300, false, SpellSpeciality.TRANSLOCATION);
+        mChampionsList.add(ch3);
 
-        Champion c4 = new Wizard ("Krypton", 8, 300, false, SpellSpeciality.FIREBALLS);
-        mChampionsList.add(c4);
+        Champion ch4 = new Wizard ("Krypton", 8, 300, false, SpellSpeciality.FIREBALLS);
+        mChampionsList.add(ch4);
 
-        Champion c5 = new Wizard ("Hedwig", 1, 400, true, SpellSpeciality.FLYING);
-        mChampionsList.add(c5);
+        Champion ch5 = new Wizard ("Hedwig", 1, 400, true, SpellSpeciality.FLYING);
+        mChampionsList.add(ch5);
 
-        Champion c6 = new Warrior ("Elblond", 1, 150, WarriorWeapon.SWORD);
-        mChampionsList.add(c6);
+        Champion ch6 = new Warrior ("Elblond", 1, 150, WarriorWeapon.SWORD);
+        mChampionsList.add(ch6);
 
-        Champion c7 = new Warrior ("Flimsi", 2, 200, WarriorWeapon.BOW);
-        mChampionsList.add(c7);
+        Champion ch7 = new Warrior ("Flimsi", 2, 200, WarriorWeapon.BOW);
+        mChampionsList.add(ch7);
 
-        Champion c8 = new Warrior ("Argon", 9, 900, WarriorWeapon.MACE);
-        mChampionsList.add(c8);
+        Champion ch8 = new Warrior ("Argon", 9, 900, WarriorWeapon.MACE);
+        mChampionsList.add(ch8);
 
-        Champion c9 = new Warrior ("Atlanta", 5, 500, WarriorWeapon.BOW);
-        mChampionsList.add(c9);
+        Champion ch9 = new Warrior ("Atlanta", 5, 500, WarriorWeapon.BOW);
+        mChampionsList.add(ch9);
 
-        Champion c10 = new Dragon ("Drabina", 7, 500, false);
-        mChampionsList.add(c10);
+        Champion ch10 = new Dragon ("Drabina", 7, 500, false);
+        mChampionsList.add(ch10);
 
-        Champion c11 = new Dragon ("Golum", 7, 500, true);
-        mChampionsList.add(c11);
+        Champion ch11 = new Dragon ("Golum", 7, 500, true);
+        mChampionsList.add(ch11);
 
-        Champion c12 = new Dragon ("Xenon", 7, 500, true);
-        mChampionsList.add(c12);
+        Champion ch12 = new Dragon ("Xenon", 7, 500, true);
+        mChampionsList.add(ch12);
     }
 
     //******* Implements interface CORE *******************
@@ -126,6 +122,7 @@ public class Tournament implements CORE, Serializable
      * whether defeated or not, and the champions currently in the 
      * team,(or, "No champions" if team is empty)
      */
+    @Override
     public String toString() {
         String isDefeated;
         // Convert boolean true/false to Is OK or Not OK.
@@ -145,6 +142,7 @@ public class Tournament implements CORE, Serializable
      * @return true if Treasury <=0 and the player's team has no
      * champions which can be decommissioned. 
      */
+    @Override
     public boolean isDefeated(){
         for (Champion champion : mChampionsList) {
             if(champion.getState() == ChampionState.ACTIVE) {
@@ -157,6 +155,7 @@ public class Tournament implements CORE, Serializable
     /** Returns the amount of money in the Treasury
      * @return the amount of money in the Treasury
      */
+    @Override
     public int getMoney(){
        return mTreasury;
     }    
@@ -164,6 +163,7 @@ public class Tournament implements CORE, Serializable
     /**Returns a String representation of all champions in reserve
      * @return a String representation of all champions in reserve
      **/
+    @Override
     public String getReserve(){
         StringBuilder reserveReturn = new StringBuilder();
 
@@ -179,6 +179,7 @@ public class Tournament implements CORE, Serializable
     /** Returns details of any champion with the given name
      * @return details of any champion with the given name
      **/
+    @Override
     public String getChampionDetails(String nme)
     {
         for (Champion champion : mChampionsList) {
@@ -193,6 +194,7 @@ public class Tournament implements CORE, Serializable
     * @param nme - champion's name
     * @return true if champion in reserve, false otherwise
     */
+    @Override
     public boolean isInReserve(String nme) {
         for (Champion champion : mChampionsList) {
             if(champion.getName().equalsIgnoreCase(nme)) {
@@ -213,6 +215,7 @@ public class Tournament implements CORE, Serializable
      * @param nme represents the name of the champion
      * @return as shown above
      **/        
+    @Override
     public int enterChampion(String nme){
         for (Champion champion : mChampionsList) {
             if(champion.getName().toLowerCase().equals(nme.toLowerCase())){
@@ -241,6 +244,7 @@ public class Tournament implements CORE, Serializable
      * @return returns true if the champion with the name
      * is in the player's team, false otherwise.
      **/
+    @Override
     public boolean isInPlayersTeam(String nme){
         for (Champion champion : mChampionsList) {
             if(champion.getName().equalsIgnoreCase(nme) && champion.getState() == ChampionState.ACTIVE){
@@ -260,6 +264,7 @@ public class Tournament implements CORE, Serializable
      * @param nme is the name of the champion
      * @return as shown above 
      **/
+    @Override
     public int retireChampion(String nme){
         for (Champion champion : mChampionsList) {
             if(champion.getName().toLowerCase().equals(nme.toLowerCase())){
@@ -285,6 +290,7 @@ public class Tournament implements CORE, Serializable
      * or the message "No champions entered"
      * @return a String representation of the champions in the player's team
      **/
+    @Override
     public String getTeam(){
         int championCount = 0;
         StringBuilder teamReturn = new StringBuilder();
@@ -309,6 +315,7 @@ public class Tournament implements CORE, Serializable
      * @param num is the number of the challenge
      * @return true if the number represents a challenge
      **/
+    @Override
      public boolean isChallenge(int num){
          for (Challenge challenge : mChallengeList) {
             if(challenge.getChallengeID() == num){
@@ -324,6 +331,7 @@ public class Tournament implements CORE, Serializable
      * @return returns a String representation of a challenge given by 
      * the challenge number
      **/
+    @Override
     public String getChallenge(int num){
         for (Challenge challenge :  mChallengeList) {
             if(challenge.getChallengeID() == num){
@@ -336,6 +344,7 @@ public class Tournament implements CORE, Serializable
     /** Provides a String representation of all challenges 
      * @return returns a String representation of all challenges
      **/
+    @Override
     public String getAllChallenges(){
         StringBuilder sb = new StringBuilder();
         for (Challenge challenge : mChallengeList) {
@@ -360,6 +369,7 @@ public class Tournament implements CORE, Serializable
      * @param chalNo is the number of the challenge
      * @return an int showing the result(as above) of fighting the challenge
      */ 
+    @Override
     public int fightChallenge(int chalNo){
         Challenge selectedChallenge = null;
         boolean suitableChampionFound = false;
@@ -419,6 +429,7 @@ public class Tournament implements CORE, Serializable
     /** Writes whole game to the specified file
      * @param fname name of file storing requests
      */
+    @Override
     public void saveGame(String fname){
         FileHandler fh = new FileHandler(fname);
         System.out.println(fh.writeObjectToFile(this));
@@ -429,6 +440,7 @@ public class Tournament implements CORE, Serializable
      * @param fname name of file storing the game
      * @return the game (as a Tournament object)
      */
+    @Override
     public CORE loadGame(String fname){
         FileHandler fh = new FileHandler();
         return fh.ReadObjectFromFile(fname);
